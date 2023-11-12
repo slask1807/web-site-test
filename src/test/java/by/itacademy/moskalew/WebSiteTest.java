@@ -43,10 +43,24 @@ public class WebSiteTest {
         String enterTitleAuthFormLocator = "/html/body/div[1]/div/div/div/div/ul/a[1]";
         By enterTitleAuthFormBy = By.xpath(enterTitleAuthFormLocator);
         Thread.sleep(4000);
-        WebElement enterTitleAuthFormWebElement = driver.findElement(enterTitleAuthFormBy);
-        String actual = enterTitleAuthFormWebElement.getText();
 
-        String expected = "Вход";
+        By inputLoginBy = By.xpath("//*[@id=\"root\"]/div/div/div/div/div/div/form/ul/li[1]/input");
+        WebElement inputLoginByWebelement = driver.findElement(inputLoginBy);
+        inputLoginByWebelement.sendKeys("qwerty");
+        Thread.sleep(4000);
+        By inputPasswordBy = By.xpath("//*[@id=\"root\"]/div/div/div/div/div/div/form/ul/li[2]/div/input");
+        WebElement inputPasswordWebelement = driver.findElement(inputPasswordBy);
+        inputPasswordWebelement.sendKeys("12345");
+
+        By buttonEnterBy = By.xpath("//*[@id=\"root\"]/div/div/div/div/div/div/form/button");
+        WebElement buttonEnterWebelement = driver.findElement(buttonEnterBy);
+        buttonEnterWebelement.click();
+        Thread.sleep(4000);
+        By textErrorMessegeBy = By.xpath("//*[@id=\"root\"]/div/div/div/div/div/div/form/span");
+        WebElement textErrorMessegeWebelement = driver.findElement(textErrorMessegeBy);
+        String actual = textErrorMessegeWebelement.getText();
+
+        String expected = "Неверный логин или пароль.";
         Assertions.assertEquals(expected, actual);
         driver.close();
     }
